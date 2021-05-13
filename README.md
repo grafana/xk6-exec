@@ -22,7 +22,7 @@ Then:
 
 2. Build the binary:
   ```shell
-  $ xk6 build --with github.com/dgzlopes/xk6-exec
+  $ xk6 build --with github.com/dgzlopes/xk6-exec@latest
   ```
 
 ## Example
