@@ -4,7 +4,7 @@ import (
 	"log"
 	"os/exec"
 
-	"github.com/loadimpact/k6/js/modules"
+	"go.k6.io/k6/js/modules"
 )
 
 func init() {
