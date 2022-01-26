@@ -1,4 +1,4 @@
-module github.com/grefana/xk6-exec
+module github.com/grafana/xk6-exec
 
 go 1.17
 
