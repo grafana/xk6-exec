@@ -2,6 +2,7 @@ package exec
 
 import (
 	"log"
+	"strings"
 	"os/exec"
 
 	"go.k6.io/k6/js/modules"
@@ -18,7 +19,7 @@ type EXEC struct{}
 func (*EXEC) Command(name string, args []string) string {
 	out, err := exec.Command(name, args...).Output()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal(err.Error() + " on command: " + name + " " + strings.Join(args, " "))
 	}
 	return string(out)
 }
