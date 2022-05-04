@@ -22,6 +22,17 @@ Then:
   xk6 build --with github.com/grafana/xk6-exec@latest
   ```
 
+## Development
+To make development a little smoother, use the `Makefile` in the root folder. The default target will format your code, run tests, and create a `k6` binary with your local code rather than from GitHub.
+
+```bash
+make
+```
+Once built, you can run your newly extended `k6` using:
+```shell
+ ./k6 run example.js
+ ```
+
 ## Example
 
 ```javascript
