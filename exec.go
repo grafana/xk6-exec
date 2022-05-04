@@ -1,3 +1,4 @@
+// Package exec provides the xk6 Modules implementation for running local commands using Javascript
 package exec
 
 import (
