@@ -30,7 +30,7 @@ make
 ```
 Once built, you can run your newly extended `k6` using:
 ```shell
- ./k6 run example.js
+ ./k6 run examples/script.js
  ```
 
 ## Example
@@ -48,7 +48,7 @@ export default function () {
 Result output:
 
 ```
-$ ./k6 run example.js
+$ ./k6 run examples/script.js
 
           /\      |‾‾| /‾‾/   /‾‾/   
      /\  /  \     |  |/  /   /  /    
@@ -57,7 +57,7 @@ $ ./k6 run example.js
   / __________ \  |__| \__\ \_____/ .io
 
   execution: local
-     script: ../example.js
+     script: examples/script.js
      output: -
 
   scenarios: (100.00%) 1 scenario, 1 max VUs, 10m30s max duration (incl. graceful stop):
