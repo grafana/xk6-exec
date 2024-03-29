@@ -2,6 +2,7 @@
 package exec
 
 import (
+	"bytes"
 	"log"
 	"os/exec"
 	"strings"
@@ -24,7 +25,15 @@ type EXEC struct {
 
 // CommandOptions contains the options that can be passed to command.
 type CommandOptions struct {
-	Dir string
+	Dir        string
+	Env        []string
+	FatalError *bool `js:"fatalError"`
+}
+
+type CommandReturn struct {
+	StatusCode int `js:"statusCode"`
+	Stdout     string
+	Stderr     string
 }
 
 // Ensure the interfaces are implemented correctly.
@@ -46,14 +55,43 @@ func (exec *EXEC) Exports() modules.Exports {
 }
 
 // Command is a wrapper for Go exec.Command
-func (*EXEC) Command(name string, args []string, option CommandOptions) string {
+func (*EXEC) Command2(name string, args []string, option CommandOptions) CommandReturn {
 	cmd := exec.Command(name, args...)
+
+	var outb, errb bytes.Buffer
+	cmd.Stdout = &outb
+	cmd.Stderr = &errb
+
 	if option.Dir != "" {
 		cmd.Dir = option.Dir
 	}
-	out, err := cmd.Output()
-	if err != nil {
-		log.Fatal(err.Error() + " on command: " + name + " " + strings.Join(args, " "))
+
+	if len(option.Env) > 0 {
+		cmd.Env = append(cmd.Environ(), option.Env...)
 	}
-	return string(out)
+	err := cmd.Run()
+	statusCode := cmd.ProcessState.ExitCode()
+	if err != nil {
+		// Keep default behaviour backwards compatible
+		if option.FatalError == nil || *option.FatalError {
+			log.Fatal(err.Error() + " on command: " + name + " " + strings.Join(args, " "))
+		} else {
+			log.Print(err.Error() + " on command: " + name + " " + strings.Join(args, " "))
+		}
+	}
+
+	return CommandReturn{
+		StatusCode: statusCode,
+		Stdout:     outb.String(),
+		Stderr:     errb.String(),
+	}
+}
+
+func (e *EXEC) Command(name string, args []string, option CommandOptions) string {
+	retval := e.Command2(name, args, option)
+	if retval.StatusCode == 0 {
+		return retval.Stdout
+	} else {
+		return retval.Stderr
+	}
 }
