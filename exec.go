@@ -24,7 +24,8 @@ type EXEC struct {
 
 // CommandOptions contains the options that can be passed to command.
 type CommandOptions struct {
-	Dir string
+	Dir             string
+	ContinueOnError bool
 }
 
 // Ensure the interfaces are implemented correctly.
@@ -46,14 +47,16 @@ func (exec *EXEC) Exports() modules.Exports {
 }
 
 // Command is a wrapper for Go exec.Command
-func (*EXEC) Command(name string, args []string, option CommandOptions) string {
+func (*EXEC) Command(name string, args []string, option CommandOptions) (string, error) {
 	cmd := exec.Command(name, args...)
 	if option.Dir != "" {
 		cmd.Dir = option.Dir
 	}
+
 	out, err := cmd.Output()
-	if err != nil {
+	if err != nil && !option.ContinueOnError {
 		log.Fatal(err.Error() + " on command: " + name + " " + strings.Join(args, " "))
 	}
-	return string(out)
+
+	return string(out), err
 }
