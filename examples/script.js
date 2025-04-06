@@ -23,7 +23,7 @@ export default function () {
   // With custom error handling and stdout
   console.log("-------------------- Example 3 -------------------------------")
   try {
-    var output = exec.command("bash",["-c","'./testscript.sh'"], {
+    var output = exec.command("sh", ["-c", "echo 'normal output'; echo 'an error' 1>&2;exit 12"], {
       "continue_on_error": true,
       "include_stdout_on_error": true
 
