@@ -35,6 +35,7 @@ export default function () {
         console.log("process_state: " + e.value.process_state);
         console.log("exit_code: " + e.value.process_state.exitCode());
         console.log("success: " + e.value.process_state.success());
+        console.log("sysUsage: " + JSON.stringify(e.value.process_state.sysUsage()));        
         console.log("stderr: " + String.fromCharCode(...e.value.stderr));
         if (e.value.stdout) {
           console.log("stdout: " + String.fromCharCode(...e.value.stdout));
