@@ -2,7 +2,9 @@
 package exec
 
 import (
+	"errors"
 	"log"
+	"os"
 	"os/exec"
 	"strings"
 
@@ -24,8 +26,19 @@ type EXEC struct {
 
 // CommandOptions contains the options that can be passed to command.
 type CommandOptions struct {
-	Dir             string
-	ContinueOnError bool
+	Dir                  string
+	ContinueOnError      bool
+	IncludeStdoutOnError bool
+}
+
+type MyExitError struct {
+	ProcessState *os.ProcessState
+	Stderr       []byte
+	Stdout       []byte
+}
+
+func (e *MyExitError) Error() string {
+	return e.ProcessState.String()
 }
 
 // Ensure the interfaces are implemented correctly.
@@ -56,6 +69,17 @@ func (*EXEC) Command(name string, args []string, option CommandOptions) (string,
 	out, err := cmd.Output()
 	if err != nil && !option.ContinueOnError {
 		log.Fatal(err.Error() + " on command: " + name + " " + strings.Join(args, " "))
+	}
+
+	if err != nil && option.IncludeStdoutOnError {
+		var exitErr *exec.ExitError
+		var myExitError MyExitError
+		if errors.As(err, &exitErr) {
+			myExitError.Stderr = exitErr.Stderr
+			myExitError.Stdout = out
+			myExitError.ProcessState = exitErr.ProcessState
+			return string(out), &myExitError
+		}
 	}
 
 	return string(out), err
