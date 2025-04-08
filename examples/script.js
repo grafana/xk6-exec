@@ -2,9 +2,13 @@ import exec from 'k6/x/exec';
 
 export default function () {
   // Basic example:
+  console.log("-------------------- Example 1 -------------------------------")
   console.log(exec.command("date"));
+
   
   // With custom error handling:
+  console.log("-------------------- Example 2 -------------------------------")
+
   try {
     var output = exec.command("ls",["-a", "NO_SUCH_DIR"], {
       "continue_on_error": true
@@ -16,7 +20,30 @@ export default function () {
         }
   }
 
+  // With custom error handling and stdout
+  console.log("-------------------- Example 3 -------------------------------")
+  try {
+    var output = exec.command("sh", ["-c", "echo 'normal output'; echo 'an error' 1>&2;exit 12"], {
+      "continue_on_error": true,
+      "include_stdout_on_error": true
+
+    });
+    console.log ("all is well")
+  } catch (e) {
+        console.log(e);
+        console.log("ERROR: " + e);
+        console.log("process_state: " + e.value.process_state);
+        console.log("exit_code: " + e.value.process_state.exitCode());
+        console.log("success: " + e.value.process_state.success());
+        console.log("sysUsage: " + JSON.stringify(e.value.process_state.sysUsage()));        
+        console.log("stderr: " + String.fromCharCode(...e.value.stderr));
+        if (e.value.stdout) {
+          console.log("stdout: " + String.fromCharCode(...e.value.stdout));
+        }
+  }
+
   // without error handling the test will stop when the following command fails
+  console.log("-------------------- Example 4 -------------------------------")
   console.log(exec.command("ls",["-a","-l"], {
     "dir": "sub-directory" // optional directory in which the command has to be run
   }));
