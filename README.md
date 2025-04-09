@@ -37,8 +37,8 @@ Once built, you can run your newly extended `k6` using:
 Possible options
 
 * dir                       specify working dir 
-*	continue_on_error         contintue script when return code is not zeored
-*	include_stdout_on_error   exposes stdout when return code is not zeored
+* continue_on_error         contintue script when return code is not zero
+* include_stdout_on_error   exposes stdout when return code is not zero
 * combined_output           combine stdout and error in output
 * env                       specify enviroment variables
 
