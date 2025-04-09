@@ -30,6 +30,7 @@ type CommandOptions struct {
 	ContinueOnError      bool
 	IncludeStdoutOnError bool
 	Env                  []string
+	CombinedOutput       bool
 }
 
 type myExitError struct {
@@ -62,7 +63,11 @@ func (exec *EXEC) Exports() modules.Exports {
 
 // Command is a wrapper for Go exec.Command
 func (*EXEC) Command(name string, args []string, option CommandOptions) (string, error) {
+	var out []byte
+	var err error
+
 	cmd := exec.Command(name, args...)
+
 	if option.Dir != "" {
 		cmd.Dir = option.Dir
 	}
@@ -71,7 +76,13 @@ func (*EXEC) Command(name string, args []string, option CommandOptions) (string,
 		cmd.Env = append(cmd.Environ(), option.Env...)
 	}
 
-	out, err := cmd.Output()
+	if option.CombinedOutput {
+		out, err = cmd.CombinedOutput()
+
+	} else {
+		out, err = cmd.Output()
+	}
+
 	if err != nil && !option.ContinueOnError {
 		log.Fatal(err.Error() + " on command: " + name + " " + strings.Join(args, " "))
 	}
