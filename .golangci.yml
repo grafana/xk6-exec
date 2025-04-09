@@ -29,7 +29,7 @@ issues:
       text: "does not use range value in test Run"
     - linters:
         - forbidigo
-      text: 'use of `os\.(SyscallError|Signal|Interrupt)` forbidden'
+      text: 'use of `os\.(SyscallError|Signal|Interrupt|ProcessState)` forbidden'
 
 linters-settings:
   nolintlint:
