@@ -78,7 +78,6 @@ func (*EXEC) Command(name string, args []string, option CommandOptions) (string,
 
 	if option.CombinedOutput {
 		out, err = cmd.CombinedOutput()
-
 	} else {
 		out, err = cmd.Output()
 	}
