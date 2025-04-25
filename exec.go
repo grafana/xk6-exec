@@ -31,13 +31,13 @@ type CommandOptions struct {
 	IncludeStdoutOnError bool
 }
 
-type MyExitError struct {
+type myExitError struct {
 	ProcessState *os.ProcessState
 	Stderr       []byte
 	Stdout       []byte
 }
 
-func (e *MyExitError) Error() string {
+func (e *myExitError) Error() string {
 	return e.ProcessState.String()
 }
 
@@ -73,12 +73,12 @@ func (*EXEC) Command(name string, args []string, option CommandOptions) (string,
 
 	if err != nil && option.IncludeStdoutOnError {
 		var exitErr *exec.ExitError
-		var myExitError MyExitError
+		var myExitErr myExitError
 		if errors.As(err, &exitErr) {
-			myExitError.Stderr = exitErr.Stderr
-			myExitError.Stdout = out
-			myExitError.ProcessState = exitErr.ProcessState
-			return string(out), &myExitError
+			myExitErr.Stderr = exitErr.Stderr
+			myExitErr.Stdout = out
+			myExitErr.ProcessState = exitErr.ProcessState
+			return string(out), &myExitErr
 		}
 	}
 
