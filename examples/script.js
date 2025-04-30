@@ -42,8 +42,18 @@ export default function () {
         }
   }
 
-  // without error handling the test will stop when the following command fails
+  // Sets an environment variable
   console.log("-------------------- Example 4 -------------------------------")
+  console.log(
+    exec.command("bash", ["-c", "echo Using enviroment variable FOO=$FOO"], {
+      env: ["FOO=bar"],
+    }),
+  );
+
+
+
+  // without error handling the test will stop when the following command fails
+  console.log("-------------------- Example 5 -------------------------------")
   console.log(exec.command("ls",["-a","-l"], {
     "dir": "sub-directory" // optional directory in which the command has to be run
   }));

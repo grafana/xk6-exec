@@ -30,7 +30,7 @@ make
 ```
 Once built, you can run your newly extended `k6` using:
 ```shell
- ./k6 run examples/script.js
+ ./k6 run examples/script.js 
  ```
 
 ## Example

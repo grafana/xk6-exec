@@ -29,6 +29,7 @@ type CommandOptions struct {
 	Dir                  string
 	ContinueOnError      bool
 	IncludeStdoutOnError bool
+	Env                  []string
 }
 
 type myExitError struct {
@@ -64,6 +65,10 @@ func (*EXEC) Command(name string, args []string, option CommandOptions) (string,
 	cmd := exec.Command(name, args...)
 	if option.Dir != "" {
 		cmd.Dir = option.Dir
+	}
+
+	if len(option.Env) > 0 {
+		cmd.Env = append(cmd.Environ(), option.Env...)
 	}
 
 	out, err := cmd.Output()
