@@ -55,7 +55,7 @@ export default function () {
     // With combine stdout en stderr
     console.log("-------------------- Example 5 -------------------------------")
     var output = exec.command("sh", ["-c", "echo -n 'normal output '; echo 'and an error' 1>&2"], {
-      "combined_output": true,
+      "combine_output": true,
     });
     console.log (output)
 
