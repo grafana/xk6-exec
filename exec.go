@@ -76,7 +76,7 @@ func (*EXEC) Command(name string, args []string, option CommandOptions) (string,
 		cmd.Env = append(cmd.Environ(), option.Env...)
 	}
 
-	if option.CombinedOutput {
+	if option.CombineOutput {
 		out, err = cmd.CombinedOutput()
 	} else {
 		out, err = cmd.Output()
