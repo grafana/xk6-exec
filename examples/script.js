@@ -52,8 +52,17 @@ export default function () {
 
 
 
+    // With combined stdout and stderr
+    console.log("-------------------- Example 5 -------------------------------")
+    var output = exec.command("sh", ["-c", "echo -n 'normal output '; echo 'and an error' 1>&2"], {
+      "combine_output": true,
+    });
+    console.log (output)
+
+
+
   // without error handling the test will stop when the following command fails
-  console.log("-------------------- Example 5 -------------------------------")
+  console.log("-------------------- Example 6 -------------------------------")
   console.log(exec.command("ls",["-a","-l"], {
     "dir": "sub-directory" // optional directory in which the command has to be run
   }));
