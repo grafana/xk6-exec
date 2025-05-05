@@ -30,7 +30,7 @@ type CommandOptions struct {
 	ContinueOnError      bool
 	IncludeStdoutOnError bool
 	Env                  []string
-	CombinedOutput       bool
+	CombineOutput        bool
 }
 
 type myExitError struct {
