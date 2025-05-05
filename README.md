@@ -39,7 +39,7 @@ Possible options
 * dir                       specify working dir 
 * continue_on_error         contintue script when return code is not zero
 * include_stdout_on_error   exposes stdout when return code is not zero
-* combined_output           combine stdout and error in output
+* combine_output            combines stdout and error in output
 * env                       specify enviroment variables
 
 see examples/script.js for details
