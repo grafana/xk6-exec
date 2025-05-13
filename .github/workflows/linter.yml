@@ -2,16 +2,22 @@ name: Lint
 
 on: push
 
+permissions:
+  contents: read
+
 jobs:
   check-modules:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          persist-credentials: false
       - name: Install Go
         uses: actions/setup-go@v3
         with:
           go-version: 1.20.x
+          cache: false
       - name: Check module dependencies
         run: |
           go version
@@ -22,19 +28,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: false
       - name: Install Go
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v5
         with:
           go-version: 1.20.x
+          cache: false
       - name: Retrieve golangci-lint version
         run: |
           echo "Version=$(head -n 1 "${GITHUB_WORKSPACE}/.golangci.yml" | tr -d '# ')" >> $GITHUB_OUTPUT
         id: version
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v3
+        uses: golangci/golangci-lint-action@55c2c1448f86e01eaae002a5a3a9624417608d84 # v6.5.2
         with:
           version: ${{ steps.version.outputs.Version }}
           only-new-issues: true
