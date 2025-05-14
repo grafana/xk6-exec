@@ -32,6 +32,17 @@ Once built, you can run your newly extended `k6` using:
 ```shell
  ./k6 run examples/script.js 
  ```
+## Configuration
+
+Possible options
+
+* dir                       specify working dir 
+* continue_on_error         contintue script when return code is not zero
+* include_stdout_on_error   exposes stdout when return code is not zero
+* combine_output            combines stdout and error in output
+* env                       specify enviroment variables
+
+see examples/script.js for details
 
 ## Example
 
