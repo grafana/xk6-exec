@@ -6,7 +6,6 @@ metadata:
   description: |
     A k6 extension for running external commands.
   annotations:
-    backstage.io/techdocs-ref: dir:.
     github.com/project-slug: grafana/xk6-exec
 spec:
   type: library
