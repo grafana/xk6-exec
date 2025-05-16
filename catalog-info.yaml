@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: xk6-exec
+  title: xk6-exec
+  description: |
+    A k6 extension for running external commands.
+  annotations:
+    github.com/project-slug: grafana/xk6-exec
+spec:
+  type: library
+  owner: group:default/k6-extensions
+  lifecycle: production
