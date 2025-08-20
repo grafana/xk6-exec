@@ -69,7 +69,6 @@ linters:
     - bodyclose
     - contextcheck
     - cyclop
-    - depguard
     - dogsled
     - dupl
     - durationcheck
@@ -78,7 +77,6 @@ linters:
     - errname
     - errorlint
     - exhaustive
-    - exportloopref
     - forbidigo
     - forcetypeassert
     - funlen
