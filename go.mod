@@ -4,7 +4,7 @@ go 1.23.0
 
 toolchain go1.23.6
 
-require go.k6.io/k6 v1.2.2
+require go.k6.io/k6 v1.2.3
 
 require (
 	github.com/cenkalti/backoff/v5 v5.0.3 // indirect
@@ -24,7 +24,7 @@ require (
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mstoykov/atlas v0.0.0-20220811071828-388f114305dd // indirect
 	github.com/onsi/ginkgo v1.16.5 // indirect
-	github.com/onsi/gomega v1.27.6 // indirect
+	github.com/onsi/gomega v1.33.0 // indirect
 	github.com/serenize/snaker v0.0.0-20201027110005-a7ad2135616e // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/spf13/afero v1.14.0 // indirect
