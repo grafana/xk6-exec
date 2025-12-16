@@ -16,7 +16,7 @@ jobs:
       - name: Install Go
         uses: actions/setup-go@4dc6199c7b1a012772edbd06daecab0f50c9053c # v6
         with:
-          go-version: 1.23.x
+          go-version: 1.25.x
           cache: false
       - name: Check module dependencies
         run: |
@@ -35,7 +35,7 @@ jobs:
       - name: Install Go
         uses: actions/setup-go@4dc6199c7b1a012772edbd06daecab0f50c9053c # v6
         with:
-          go-version: 1.23.x
+          go-version: 1.25.x
           cache: false
       - name: Retrieve golangci-lint version
         run: |
@@ -48,4 +48,3 @@ jobs:
           args: --timeout=30m
           install-mode: binary
           verify: false
-
