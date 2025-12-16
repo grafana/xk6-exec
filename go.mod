@@ -1,8 +1,6 @@
 module github.com/grafana/xk6-exec
 
-go 1.24.0
-
-toolchain go1.24.10
+go 1.24
 
 require go.k6.io/k6 v1.4.2
 
