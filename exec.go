@@ -57,17 +57,18 @@ func (*RootModule) NewModuleInstance(vu modules.VU) modules.Instance {
 
 // Exports implements the modules.Instance interface and returns the exports
 // of the JS module.
-func (exec *EXEC) Exports() modules.Exports {
-	return modules.Exports{Default: exec}
+func (e *EXEC) Exports() modules.Exports {
+	return modules.Exports{Default: e}
 }
 
-// Command is a wrapper for Go exec.Command
-func (*EXEC) Command(name string, args []string, option CommandOptions) (string, error) {
-	var out []byte
-	var err error
+// Command is a wrapper for Go exec.Command.
+func (e *EXEC) Command(name string, args []string, option CommandOptions) (string, error) {
+	var (
+		out []byte
+		err error
+	)
 
-	cmd := exec.Command(name, args...)
-
+	cmd := exec.CommandContext(e.vu.Context(), name, args...)
 	if option.Dir != "" {
 		cmd.Dir = option.Dir
 	}
@@ -87,12 +88,16 @@ func (*EXEC) Command(name string, args []string, option CommandOptions) (string,
 	}
 
 	if err != nil && option.IncludeStdoutOnError {
-		var exitErr *exec.ExitError
-		var myExitErr myExitError
+		var (
+			exitErr   *exec.ExitError
+			myExitErr myExitError
+		)
+
 		if errors.As(err, &exitErr) {
 			myExitErr.Stderr = exitErr.Stderr
 			myExitErr.Stdout = out
 			myExitErr.ProcessState = exitErr.ProcessState
+
 			return string(out), &myExitErr
 		}
 	}
