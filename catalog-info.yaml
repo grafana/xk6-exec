@@ -10,4 +10,4 @@ metadata:
 spec:
   type: library
   owner: group:default/k6-extensions
-  lifecycle: production
+  lifecycle: experimental
