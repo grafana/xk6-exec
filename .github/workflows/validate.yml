@@ -12,7 +12,7 @@ on:
 jobs:
   validate:
     name: Validate
-    uses: grafana/xk6/.github/workflows/extension-validate.yml@da8eccb3592e057e56d1017218ba5fd7a91927aa # v1.3.2
+    uses: grafana/xk6/.github/workflows/extension-validate.yml@6bf2772548c275ca0b6ca4de73fa1b183a8ed0fc # v1.3.4
     permissions:
       contents: read
       pages: write
