@@ -1,8 +1,8 @@
 module github.com/grafana/xk6-exec
 
-go 1.24.0
+go 1.25.0
 
-require go.k6.io/k6 v1.6.1
+require go.k6.io/k6 v1.7.1
 
 require (
 	github.com/cenkalti/backoff/v5 v5.0.3 // indirect
@@ -15,7 +15,7 @@ require (
 	github.com/go-sourcemap/sourcemap v2.1.4+incompatible // indirect
 	github.com/google/pprof v0.0.0-20250630185457-6e76a2b096b5 // indirect
 	github.com/google/uuid v1.6.0 // indirect
-	github.com/grafana/sobek v0.0.0-20260121195222-d8d9202018c5 // indirect
+	github.com/grafana/sobek v0.0.0-20260219184149-bdae4a158e94 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.2 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/mailru/easyjson v0.9.0 // indirect
